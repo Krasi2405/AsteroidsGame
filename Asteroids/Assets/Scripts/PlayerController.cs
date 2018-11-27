@@ -1,23 +1,76 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
+[RequireComponent(typeof(JetFlyMode))]
+[RequireComponent(typeof(HelicopterFlyMode))]
 public class PlayerController : MonoBehaviour
 {
-    public float PlayerSpeed = 0.2f;
+    [SerializeField]
+    private string modeSwitchActivationKey;
+
+    private Animator animator;
+
+    private bool canSwitchMode = true;
+    private bool switchModeTrigger = false;
+
+    JetFlyMode jetMode;
+    HelicopterFlyMode heliMode;
+
+    private void Start()
+    {
+        jetMode = GetComponent<JetFlyMode>();
+        heliMode = GetComponent<HelicopterFlyMode>();
+        animator = GetComponent<Animator>();
+
+        jetMode.enabled = true;
+        heliMode.enabled = false;
+    }
+
     void Update()
     {
-        float verticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float playerCameraOffset = Camera.main.transform.position.y - transform.position.y;
-        Vector3 mousePositionScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, playerCameraOffset);
-        Vector3 mousePositionWorldSpace = Camera.main.ScreenToWorldPoint(mousePositionScreenSpace);
-        transform.LookAt(mousePositionWorldSpace);
+        if (CrossPlatformInputManager.GetButtonDown(modeSwitchActivationKey) && canSwitchMode)
+        {
+            if (heliMode.enabled)
+            {
+                animator.SetTrigger("HoverToFlyingTrigger");
+            }
+            else if(jetMode.enabled)
+            {
+                animator.SetTrigger("FlyingToHoverTrigger");
+            }
+            else
+            {
+                throw new UnityException("No fly modes enabled!");
+            }
+            
+            canSwitchMode = false;
+            switchModeTrigger = true;
+        }
+    }
 
-        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
-        direction = transform.rotation * direction;
-        direction = direction * PlayerSpeed * Time.deltaTime;
-        transform.position += direction;
+    private void LateUpdate()
+    {
+        if(switchModeTrigger)
+        {
+            float length = animator.GetCurrentAnimatorStateInfo(0).length;
+            Debug.Log(length);
+            Invoke("UnlockModeSwitch", length);
+            Invoke("SwitchMode", length / 2);
+            switchModeTrigger = false;
+        }
+    }
+
+    private void UnlockModeSwitch()
+    {
+        canSwitchMode = true;
+    }
+
+    private void SwitchMode()
+    {
+        heliMode.enabled = !heliMode.enabled;
+        jetMode.enabled = !jetMode.enabled;
     }
 
 }

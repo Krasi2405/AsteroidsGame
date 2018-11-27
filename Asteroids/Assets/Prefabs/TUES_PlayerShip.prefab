@@ -21,9 +21,13 @@ GameObject:
   - component: {fileID: 4557010147948922}
   - component: {fileID: 33482104683178946}
   - component: {fileID: 23733463924541088}
+  - component: {fileID: 54332667913961602}
+  - component: {fileID: 114368003426360798}
+  - component: {fileID: 114762475643563248}
+  - component: {fileID: 114996704376146402}
   m_Layer: 0
   m_Name: TUES_PlayerShip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +87,55 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731855341555884}
   m_Mesh: {fileID: 4300000, guid: 4caf598f9f2f994419082e702b4d1d55, type: 3}
+--- !u!54 &54332667913961602
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731855341555884}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 2
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 16
+  m_CollisionDetection: 0
+--- !u!114 &114368003426360798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731855341555884}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2677626a6c892a468c22bb2c15dedda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modeSwitchActivationKey: 
+--- !u!114 &114762475643563248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731855341555884}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7c11a11c04bf94ea0c86f71a371806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114996704376146402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731855341555884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdae6a22eaa52e84d8714b297523146b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 1000
+  torque: 200
+  wingTippingRotation: 30
