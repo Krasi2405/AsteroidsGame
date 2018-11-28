@@ -15,7 +15,7 @@ public class Asteroid : MonoBehaviour {
         PlayerController player = FindObjectOfType<PlayerController>();
         transform.LookAt(player.transform);
 
-        transform.RotateAround(Vector3.zero, Vector3.up, 20 * Time.deltaTime);
+        
     }
 	
 
