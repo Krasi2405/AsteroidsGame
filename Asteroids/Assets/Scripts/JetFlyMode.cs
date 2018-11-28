@@ -12,6 +12,9 @@ public class JetFlyMode : MonoBehaviour {
     [SerializeField]
     private float wingTippingRotation = 30;
 
+    [SerializeField]
+    private float wingTippingPerSecond = 90;
+
     private Rigidbody rigidbody;
 
     void Start () {
@@ -25,8 +28,38 @@ public class JetFlyMode : MonoBehaviour {
         rigidbody.AddForce(transform.forward * verticalInput * acceleration * Time.deltaTime);
         rigidbody.AddTorque(Vector3.up * horizontalInput * torque * Time.deltaTime);
         
-        Vector3 newRotation = transform.eulerAngles;
-        newRotation.z = wingTippingRotation * horizontalInput * -1;
-        transform.eulerAngles = newRotation;
+        TipWings(wingTippingRotation * horizontalInput * -1);
 	}
+
+    void TipWings(float target)
+    {
+        Vector3 rotation = transform.eulerAngles;
+        float currentRotation = rotation.z;
+        if (currentRotation > 180)
+        {
+            currentRotation -= 360;
+        }
+
+
+        float newRotation = currentRotation;
+        if(currentRotation > target)
+        {
+            newRotation = currentRotation - wingTippingPerSecond * Time.deltaTime;
+            if(newRotation < target)
+            {
+                newRotation = target;
+            }
+        }
+        else if(currentRotation < target)
+        {
+            newRotation = currentRotation + wingTippingPerSecond * Time.deltaTime;
+            if(newRotation > target)
+            {
+                newRotation = target;
+            }
+        }
+
+        rotation.z = newRotation;
+        transform.eulerAngles = rotation;
+    }
 }

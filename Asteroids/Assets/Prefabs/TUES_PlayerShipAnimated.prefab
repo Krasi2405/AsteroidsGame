@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 4319151523553594}
   - component: {fileID: 95721810607792946}
   - component: {fileID: 54179183084378120}
+  - component: {fileID: 65429140848928990}
   - component: {fileID: 114009423653590792}
   - component: {fileID: 114602076223390236}
   - component: {fileID: 114337971417867820}
@@ -409,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 1545186286483020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4857618147120908}
   - {fileID: 4265270196330992}
@@ -611,6 +612,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65429140848928990
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1545186286483020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.63, y: 1.3, z: 4}
+  m_Center: {x: 0, y: 0, z: -0.6}
 --- !u!95 &95721810607792946
 Animator:
   serializedVersion: 3
@@ -640,6 +653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7c11a11c04bf94ea0c86f71a371806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  rotationLerpSpeed: 0.08
 --- !u!114 &114337971417867820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -663,9 +678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdae6a22eaa52e84d8714b297523146b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
-  torque: 100
+  acceleration: 500
+  torque: 300
   wingTippingRotation: 30
+  wingTippingPerSecond: 90
 --- !u!137 &137256533917764860
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
