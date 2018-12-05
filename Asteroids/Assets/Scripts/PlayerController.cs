@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private string modeSwitchActivationKey;
 
+    [SerializeField]
+    ParticleSystem explosionParticles;
+
     private Animator animator;
 
     private bool canSwitchMode = true;
@@ -60,6 +63,14 @@ public class PlayerController : MonoBehaviour
             Invoke("SwitchMode", length / 2);
             switchModeTrigger = false;
         }
+    }
+
+    public void Die()
+    {
+        ParticleSystem particles = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+        Destroy(particles, particles.time);
+
+        Destroy(gameObject, 0.1f);
     }
 
     private void UnlockModeSwitch()
