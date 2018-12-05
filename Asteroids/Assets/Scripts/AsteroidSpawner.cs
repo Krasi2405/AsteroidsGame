@@ -10,6 +10,8 @@ public class AsteroidSpawner : MonoBehaviour {
     [SerializeField]
     private float spawnTime = 1;
 
+    private float lastSpawnDegrees = 0;
+
     void Start()
     {
         StartCoroutine("SpawnAsteroidLoop");
@@ -42,8 +44,37 @@ public class AsteroidSpawner : MonoBehaviour {
         int index = Random.Range(0, asteroidPrefabs.Length);
         Asteroid asteroid = Instantiate(asteroidPrefabs[index]);
         asteroid.transform.position = position;
+        
+        asteroid.transform.RotateAround(Vector3.zero, Vector3.up, GetSpawnDegrees());
+    }
 
+    float GetSpawnDegrees()
+    {
         float degrees = Random.Range(0, 360);
-        asteroid.transform.RotateAround(Vector3.zero, Vector3.up, degrees);
+        if(SpawnDegreesOverlap(degrees, lastSpawnDegrees))
+        {
+            return GetSpawnDegrees();
+        }
+
+        lastSpawnDegrees = degrees;
+        return degrees;
+    }
+
+    bool SpawnDegreesOverlap(float degrees, float lastSpawnDegrees)
+    {
+        float testDegrees = degrees + 10;
+        float testTowards = lastSpawnDegrees + 10;
+
+        testDegrees = testDegrees % 360;
+        testTowards = testTowards % 360;
+
+        // 10 is degrees that asteroids have to be apart when spawning
+        // TODO: perhaps change to SerializeField in future
+        if (testDegrees >= testTowards && testDegrees - 10 <= testTowards ||
+           testDegrees <= testTowards && testDegrees + 10 >= testTowards)
+        {
+            return true;
+        }
+        return false;
     }
 }
