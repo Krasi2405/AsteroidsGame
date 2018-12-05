@@ -26,10 +26,10 @@ GameObject:
   - component: {fileID: 114441747551299162}
   m_Layer: 0
   m_Name: prop_asteroid_01
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4150186854246416
 Transform:
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005c7304a76ef71479cdfcc3f924e3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionParticles: {fileID: 0}
   speed: 5
   maxRotationalForce: 100
 --- !u!136 &136380037669269412

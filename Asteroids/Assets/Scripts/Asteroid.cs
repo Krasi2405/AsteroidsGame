@@ -5,6 +5,10 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour {
 
     [SerializeField]
+    ParticleSystem explosionParticles;
+    
+
+    [SerializeField]
     private float speed = 5;
 
     [SerializeField]
@@ -27,7 +31,7 @@ public class Asteroid : MonoBehaviour {
            Random.Range(maxRotationalForce / 10, maxRotationalForce),
            Random.Range(maxRotationalForce / 10, maxRotationalForce),
            Random.Range(maxRotationalForce / 10, maxRotationalForce)
-       );
+        );
     }
 	
 
@@ -43,5 +47,28 @@ public class Asteroid : MonoBehaviour {
     private void ApplyRotationalForce()
     {
         transform.Rotate(rotationalForce * Time.deltaTime, Space.Self);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(gameObject.tag == collision.gameObject.tag) // other is asteroid.
+        {
+            Vector3 explosionPosition = (transform.position + collision.transform.position) / 2;
+            ParticleSystem explosion = Instantiate(explosionParticles, explosionPosition, Quaternion.identity);
+            Destroy(explosion, explosion.time);
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        else if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerController>().Die();
+            Destroy(gameObject);
+        }
+    }
+
+    void SpawnOneTimeParticles(ParticleSystem particlesPrefab)
+    {
+        ParticleSystem explosion = Instantiate(particlesPrefab);
+        Destroy(explosion, explosion.time);
     }
 }

@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 114009423653590792}
   - component: {fileID: 114602076223390236}
   - component: {fileID: 114337971417867820}
+  - component: {fileID: 114771565585730466}
   m_Layer: 0
   m_Name: TUES_PlayerShipAnimated
   m_TagString: Untagged
@@ -681,7 +682,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1545186286483020}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6.63, y: 1.3, z: 4}
@@ -729,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modeSwitchActivationKey: ShiftMode
+  explosionParticles: {fileID: 19800010, guid: a93496017806b7740910df5fd946f306, type: 2}
 --- !u!114 &114602076223390236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -744,6 +746,17 @@ MonoBehaviour:
   torque: 300
   wingTippingRotation: 30
   wingTippingPerSecond: 90
+--- !u!114 &114771565585730466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1545186286483020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3244ac8be760b24f813096406fe3505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137256533917764860
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

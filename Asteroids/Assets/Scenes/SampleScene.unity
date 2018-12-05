@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -221,6 +221,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1076236594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1545186286483020, guid: 510d454d3ca64a441abc86142da44170,
+    type: 2}
+  m_PrefabInternal: {fileID: 1389405096}
+--- !u!114 &1076236595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076236594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3244ac8be760b24f813096406fe3505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1090500654
 Prefab:
   m_ObjectHideFlags: 0
@@ -260,10 +276,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114691297875611964, guid: d4356f75ce9b75345acfe293da7276ed,
+    - target: {fileID: 114662060428944606, guid: d4356f75ce9b75345acfe293da7276ed,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4356f75ce9b75345acfe293da7276ed, type: 2}
@@ -307,6 +323,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114337971417867820, guid: 510d454d3ca64a441abc86142da44170,
+        type: 2}
+      propertyPath: explosionParticles
+      value: 
+      objectReference: {fileID: 19800010, guid: a93496017806b7740910df5fd946f306,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510d454d3ca64a441abc86142da44170, type: 2}
   m_IsPrefabAsset: 0
