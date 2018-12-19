@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
         Destroy(particles, particles.time);
 
         Destroy(gameObject, 0.1f);
+
+        FindObjectOfType<LevelStateManager>().Lose();
     }
 
     private void UnlockModeSwitch()
