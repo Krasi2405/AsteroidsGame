@@ -15,7 +15,6 @@ public class Asteroid : MonoBehaviour {
 
     [SerializeField]
     private float damage = 20;
-    
 
     private Vector3 rotationalForce;
 
@@ -94,6 +93,8 @@ public class Asteroid : MonoBehaviour {
             }
             Destroy(collision.gameObject);
             Destroy(gameObject);
+
+            FindObjectOfType<Score>().AddScore(100); // TODO: SerializeField this.
         }
     }
 
