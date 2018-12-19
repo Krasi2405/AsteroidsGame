@@ -13,10 +13,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     ParticleSystem explosionParticles;
 
+    [SerializeField]
+    private float maxHealth = 100;
+
+    private float currentHealth;
+
     private Animator animator;
 
     private bool canSwitchMode = true;
     private bool switchModeTrigger = false;
+
 
     JetFlyMode jetMode;
     HelicopterFlyMode heliMode;
@@ -29,9 +35,11 @@ public class PlayerController : MonoBehaviour
 
         jetMode.enabled = true;
         heliMode.enabled = false;
+
+        currentHealth = maxHealth;
     }
 
-    void Update()
+    private void Update()
     {
         if (CrossPlatformInputManager.GetButtonDown(modeSwitchActivationKey) && canSwitchMode)
         {
@@ -65,7 +73,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Die()
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
     {
         ParticleSystem particles = Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Destroy(particles, particles.time);

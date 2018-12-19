@@ -46,6 +46,7 @@ public class AsteroidSpawner : MonoBehaviour {
         asteroid.transform.position = position;
         
         asteroid.transform.RotateAround(Vector3.zero, Vector3.up, GetSpawnDegrees());
+        asteroid.SetTarget(FindObjectOfType<PlayerController>().transform.position);
     }
 
     float GetSpawnDegrees()

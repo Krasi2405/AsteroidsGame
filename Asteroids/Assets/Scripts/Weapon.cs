@@ -19,10 +19,14 @@ public class Weapon : MonoBehaviour {
 	
 
 	void Update () {
-		if(Time.time >= lastShot)
+		if(lastShot >= shotDelay)
         {
             Shoot();
-            lastShot = Time.time + shotDelay;
+            lastShot = 0;
+        }
+        else
+        {
+            lastShot += Time.deltaTime;
         }
 	}
 
@@ -34,7 +38,6 @@ public class Weapon : MonoBehaviour {
             transform.position, 
             Quaternion.Euler(transform.forward)
         );
-
-        projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectile.GetSpeed());
+        projectile.SetParent(gameObject);
     }
 }
