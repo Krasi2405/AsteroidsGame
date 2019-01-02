@@ -7,6 +7,10 @@ public class JetFlyMode : FlyMode {
     private float acceleration = 5f;
 
     [SerializeField]
+    [Range(0, 1)]
+    private float accelerationInfluence = 0.6f;
+
+    [SerializeField]
     private float torque = 5f;
 
     [SerializeField]
@@ -15,7 +19,10 @@ public class JetFlyMode : FlyMode {
     [SerializeField]
     private float wingTippingPerSecond = 90;
 
+    
+
     private Rigidbody rigidbody;
+
 
     void Start () {
         rigidbody = GetComponent<Rigidbody>();
@@ -24,7 +31,10 @@ public class JetFlyMode : FlyMode {
 
     public override void HandleInput(float horizontalInput, float verticalInput, Vector3 targetLocation)
     {
-        rigidbody.AddForce(transform.forward * verticalInput * acceleration * Time.deltaTime);
+        float forwardSpeed = acceleration + acceleration * (verticalInput * accelerationInfluence);
+        Debug.Log(forwardSpeed);
+
+        rigidbody.AddForce(transform.forward * forwardSpeed * Time.deltaTime);
         rigidbody.AddTorque(Vector3.up * horizontalInput * torque * Time.deltaTime);
 
         TipWings(wingTippingRotation * horizontalInput * -1);
