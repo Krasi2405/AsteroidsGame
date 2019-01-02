@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-public class JetFlyMode : MonoBehaviour {
+public class JetFlyMode : FlyMode {
     [SerializeField]
     private float acceleration = 5f;
 
@@ -20,16 +20,15 @@ public class JetFlyMode : MonoBehaviour {
     void Start () {
         rigidbody = GetComponent<Rigidbody>();
 	}
-	
-	void Update () {
-        float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
-        float verticalInput = CrossPlatformInputManager.GetAxis("Vertical");
 
+
+    public override void HandleInput(float horizontalInput, float verticalInput, Vector3 targetLocation)
+    {
         rigidbody.AddForce(transform.forward * verticalInput * acceleration * Time.deltaTime);
         rigidbody.AddTorque(Vector3.up * horizontalInput * torque * Time.deltaTime);
-        
+
         TipWings(wingTippingRotation * horizontalInput * -1);
-	}
+    }
 
     void TipWings(float target)
     {

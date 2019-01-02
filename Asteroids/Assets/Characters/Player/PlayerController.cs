@@ -22,56 +22,45 @@ public class PlayerController : MonoBehaviour
 
     private bool canSwitchMode = true;
     private bool switchModeTrigger = false;
+    
+    FlyMode[] flyModes;
 
+    FlyMode currentFlyMode;
 
-    JetFlyMode jetMode;
-    HelicopterFlyMode heliMode;
+    int currentFlyModeCount = 0;
 
     private void Start()
     {
-        jetMode = GetComponent<JetFlyMode>();
-        heliMode = GetComponent<HelicopterFlyMode>();
         animator = GetComponent<Animator>();
+        flyModes = GetComponents<FlyMode>();
+        if (flyModes.Length == 0)
+        {
+            Debug.LogError("Player cannot fly with no fly modes!");
+            Destroy(gameObject);
+        }
+        else if (flyModes.Length != 2)
+        {
+            Debug.LogWarning("Player balacing centered around 2 fly modes!");
+        }
 
-        jetMode.enabled = true;
-        heliMode.enabled = false;
+        
+        currentFlyMode = flyModes[currentFlyModeCount];
+        Debug.Log("Mode: " + currentFlyMode.GetAnimationTriggerName());
 
         currentHealth = maxHealth;
     }
 
     private void Update()
     {
+        HandleMovement();
+
         if (CrossPlatformInputManager.GetButtonDown(modeSwitchActivationKey) && canSwitchMode)
         {
-            if (heliMode.enabled)
-            {
-                animator.SetTrigger("HoverToFlyingTrigger");
-            }
-            else if(jetMode.enabled)
-            {
-                animator.SetTrigger("FlyingToHoverTrigger");
-            }
-            else
-            {
-                throw new UnityException("No fly modes enabled!");
-            }
-            
-            canSwitchMode = false;
-            switchModeTrigger = true;
+            SwitchMode();
         }
     }
 
-    private void LateUpdate()
-    {
-        if(switchModeTrigger)
-        {
-            float length = animator.GetCurrentAnimatorStateInfo(0).length;
-            Debug.Log(length);
-            Invoke("UnlockModeSwitch", length);
-            Invoke("SwitchMode", length / 2);
-            switchModeTrigger = false;
-        }
-    }
+
 
     public void TakeDamage(float damage)
     {
@@ -92,15 +81,62 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<LevelStateManager>().Lose();
     }
 
-    private void UnlockModeSwitch()
+    private void HandleMovement()
     {
-        canSwitchMode = true;
+        float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
+        float verticalInput = CrossPlatformInputManager.GetAxis("Vertical");
+
+        float playerCameraOffset = Camera.main.transform.position.y - transform.position.y;
+        Vector3 mousePositionScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, playerCameraOffset);
+        Vector3 mousePositionWorldSpace = Camera.main.ScreenToWorldPoint(mousePositionScreenSpace);
+
+        currentFlyMode.HandleInput(horizontalInput, verticalInput, mousePositionWorldSpace);
     }
 
     private void SwitchMode()
     {
-        heliMode.enabled = !heliMode.enabled;
-        jetMode.enabled = !jetMode.enabled;
+        if(!canSwitchMode)
+        {
+            return;
+        }
+        canSwitchMode = false;
+
+        currentFlyModeCount += 1;
+        if(currentFlyModeCount >= flyModes.Length)
+        {
+            currentFlyModeCount = 0;
+        }
+
+        Debug.Log(flyModes[currentFlyModeCount].GetAnimationTriggerName());
+        animator.SetTrigger(flyModes[currentFlyModeCount].GetAnimationTriggerName());
+        StartCoroutine(SetLockTime());
+    }
+
+    // Takes time for animator trigger to take effect.
+    // Get length in next frame
+    private IEnumerator SetLockTime()
+    {
+        yield return new WaitForEndOfFrame();
+
+        float length = animator.GetCurrentAnimatorStateInfo(0).length;
+        
+        Invoke("UnlockModeSwitch", length);
+        Invoke("ActivateCurrentFlyMode", length / 2);
+    }
+
+    private void ActivateCurrentFlyMode()
+    {
+        foreach (FlyMode mode in flyModes)
+        {
+            mode.enabled = false;
+        }
+        currentFlyMode = flyModes[currentFlyModeCount];
+        currentFlyMode.enabled = true;
+    }
+
+    private void UnlockModeSwitch()
+    {
+        canSwitchMode = true;
     }
 
 }
