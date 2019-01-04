@@ -5285,6 +5285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationTriggerName: HoverToFlyingTrigger
   acceleration: 500
+  accelerationInfluence: 0.6
   torque: 300
   wingTippingRotation: 30
   wingTippingPerSecond: 90
