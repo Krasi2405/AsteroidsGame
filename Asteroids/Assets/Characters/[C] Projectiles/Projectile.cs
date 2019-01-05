@@ -9,24 +9,38 @@ public class Projectile : MonoBehaviour {
     private float speed = 10;
 
     [SerializeField]
+    private float damage = 5;
+
+    [SerializeField]
     private float timeToLive = 20f;
 
     [SerializeField]
     private GameObject parent;
+
+    private Vector3 target;
+    
+	void Start () {
+        Destroy(gameObject, timeToLive);
+    }
+    
+    void LateUpdate()
+    {
+        transform.position += target.normalized;
+    }
 
     public void SetParent(GameObject parent)
     {
         this.parent = parent;
     }
 
-	void Start () {
-        Destroy(gameObject, timeToLive);
-        GetComponent<Rigidbody>().AddForce(parent.transform.forward * speed);
-        gameObject.transform.LookAt(parent.transform.position + parent.transform.forward);
+    public void SetTarget(Vector3 target)
+    {
+        this.target = target;
+        gameObject.transform.LookAt(transform.position + target.normalized);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 }

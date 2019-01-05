@@ -8,36 +8,63 @@ public class Weapon : MonoBehaviour {
     private Projectile projectilePrefab;
 
     [SerializeField]
+    private Vector3[] shootingLocations;
+
+    [SerializeField]
     private float shotPerSecond = 5;
 
     private float shotDelay;
-    private float lastShot = 0;
+
+    private bool canShoot = true;
 
 	void Start () {
         shotDelay = 1 / shotPerSecond;
 	}
-	
 
-	void Update () {
-		if(lastShot >= shotDelay)
+    public void RequestShoot()
+    {
+        if(canShoot)
         {
+            canShoot = false;
             Shoot();
-            lastShot = 0;
+            StartCoroutine(activateShooting());
         }
-        else
-        {
-            lastShot += Time.deltaTime;
-        }
-	}
+    }
+
+    private IEnumerator activateShooting()
+    {
+        yield return new WaitForSeconds(shotDelay);
+        canShoot = true;
+    }
 
 
     private void Shoot()
     {
+        foreach (Vector3 shootingPosition in shootingLocations)
+        {
+            ShootProjectile(transform.position + shootingPosition, transform.forward);
+        }
+    }
+
+    private void ShootProjectile(Vector3 position, Vector3 direction)
+    {
+        Debug.Log("Shoot projectile!");
         Projectile projectile = Instantiate(
-            projectilePrefab, 
-            transform.position, 
+            projectilePrefab,
+            position,
             Quaternion.Euler(transform.forward)
         );
+
         projectile.SetParent(gameObject);
+        projectile.SetTarget(direction);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        foreach(Vector3 location in shootingLocations)
+        {
+            Gizmos.DrawWireSphere(transform.position + location, 0.2f);
+        }
     }
 }

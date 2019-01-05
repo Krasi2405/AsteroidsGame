@@ -5086,9 +5086,12 @@ GameObject:
   - component: {fileID: 1627414693}
   - component: {fileID: 1627414692}
   - component: {fileID: 1627414689}
+  - component: {fileID: 3702813674911331288}
+  - component: {fileID: 1133206268926069370}
   - component: {fileID: 1627414690}
   - component: {fileID: 1627414691}
   - component: {fileID: 1627414687}
+  - component: {fileID: 9139776579982743984}
   m_Layer: 0
   m_Name: TUES_PlayerShipAnimated
   m_TagString: Player
@@ -5269,8 +5272,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modeSwitchActivationKey: ShiftMode
+  shootingKey: Fire1
+--- !u!114 &3702813674911331288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627414685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63005f20e7c6bf24e9d1939b1dc77a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   explosionParticles: {fileID: 19800010, guid: a93496017806b7740910df5fd946f306, type: 3}
-  maxHealth: 100
+--- !u!114 &1133206268926069370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627414685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09d2160d1ff3984bacee85a86de3d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1627414690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5287,7 +5314,7 @@ MonoBehaviour:
   acceleration: 500
   accelerationInfluence: 0.6
   torque: 300
-  wingTippingRotation: 30
+  wingTippingRotation: 15
   wingTippingPerSecond: 90
 --- !u!114 &1627414691
 MonoBehaviour:
@@ -5318,7 +5345,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 114615269642923270, guid: 39c95a0d43715f543b93b1bb3757d421,
     type: 3}
+  shootingLocations:
+  - {x: -0.15, y: 0, z: -0.6}
+  - {x: -0.15, y: 0, z: 0.6}
   shotPerSecond: 2
+--- !u!114 &9139776579982743984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627414685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879c8cb0f21b64c408d4aa22af4aaa8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoints: 100
 --- !u!1 &1644240515
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+
+[RequireComponent(typeof(FlyModeController))]
 public class JetFlyMode : FlyMode {
     [SerializeField]
     private float acceleration = 5f;
@@ -32,7 +34,6 @@ public class JetFlyMode : FlyMode {
     public override void HandleInput(float horizontalInput, float verticalInput, Vector3 targetLocation)
     {
         float forwardSpeed = acceleration + acceleration * (verticalInput * accelerationInfluence);
-        Debug.Log(forwardSpeed);
 
         rigidbody.AddForce(transform.forward * forwardSpeed * Time.deltaTime);
         rigidbody.AddTorque(Vector3.up * horizontalInput * torque * Time.deltaTime);

@@ -80,7 +80,7 @@ public class Asteroid : MonoBehaviour {
         }
         else if(collision.gameObject.GetComponent<PlayerController>())
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Spaceship>().TakeDamage(damage);
 
             SpawnOneTimeParticles(explosionParticles, transform.position);
             Destroy(gameObject);
