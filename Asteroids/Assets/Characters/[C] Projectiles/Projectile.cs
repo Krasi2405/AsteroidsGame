@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour {
     
     void LateUpdate()
     {
-        transform.position += target.normalized;
+        transform.position += target.normalized * speed * Time.deltaTime;
     }
 
     public void SetParent(GameObject parent)

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1358029762855697632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2.4, z: 2}
   m_Children:
   - {fileID: 9169181298830250281}
   - {fileID: 3026558124680345779}
@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4745604663456442, guid: 4fdc63e4fff4faa4d9837cd87a82f7f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.86
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4745604663456442, guid: 4fdc63e4fff4faa4d9837cd87a82f7f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -112,19 +112,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1121743457394112, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
       propertyPath: m_Name
-      value: Red
+      value: RedTurret
       objectReference: {fileID: 0}
     - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.024934897
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.019125495
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -157,18 +157,6 @@ PrefabInstance:
     - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863693907352306, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8030ced615a91746b9e50801cf8ad5b, type: 3}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-[RequireComponent(typeof(FlyModeController))]
 public class JetFlyMode : FlyMode {
     [SerializeField]
     private float acceleration = 5f;

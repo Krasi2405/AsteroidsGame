@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
     private Projectile projectilePrefab;
 
     [SerializeField]
-    private Vector3[] shootingLocations;
+    private ShootingLocation[] shootingLocations;
 
     [SerializeField]
     private float shotPerSecond = 5;
@@ -40,9 +40,11 @@ public class Weapon : MonoBehaviour {
 
     private void Shoot()
     {
-        foreach (Vector3 shootingPosition in shootingLocations)
+        foreach (ShootingLocation shootingPosition in shootingLocations)
         {
-            ShootProjectile(transform.position + shootingPosition, transform.forward);
+            Vector3 worldPoint = shootingPosition.GetLocation();
+            Vector3 direction = shootingPosition.GetForwardDirection();
+            ShootProjectile(worldPoint, direction);
         }
     }
 
@@ -57,14 +59,5 @@ public class Weapon : MonoBehaviour {
 
         projectile.SetParent(gameObject);
         projectile.SetTarget(direction);
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        foreach(Vector3 location in shootingLocations)
-        {
-            Gizmos.DrawWireSphere(transform.position + location, 0.2f);
-        }
     }
 }
