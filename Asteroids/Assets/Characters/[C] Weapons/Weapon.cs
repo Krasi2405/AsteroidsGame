@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
     private Projectile projectilePrefab;
 
     [SerializeField]
-    private ShootingLocation[] shootingLocations;
+    private Location[] shootingLocations;
 
     [SerializeField]
     private float shotPerSecond = 5;
@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour {
 
     private void Shoot()
     {
-        foreach (ShootingLocation shootingPosition in shootingLocations)
+        foreach (Location shootingPosition in shootingLocations)
         {
             Vector3 worldPoint = shootingPosition.GetLocation();
             Vector3 direction = shootingPosition.GetForwardDirection();

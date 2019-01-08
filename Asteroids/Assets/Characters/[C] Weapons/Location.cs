@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingLocation : MonoBehaviour
+public class Location : MonoBehaviour
 {
     public Vector3 GetLocation()
     {
@@ -16,6 +16,7 @@ public class ShootingLocation : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 0.2f);
+        Gizmos.DrawWireSphere(transform.position, 0.4f);
+        Gizmos.DrawRay(transform.position, GetForwardDirection() * 2);
     }
 }
