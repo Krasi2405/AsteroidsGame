@@ -43,15 +43,19 @@ public class TriggerEffectMoveto : TriggerEffect
         foreach(Location location in locations)
         {
             Vector3 destination = location.GetLocation();
-
+            Vector3 travelDirection = (destination - player.transform.position).normalized;
             float travelledDistance = 0;
             float distance = (player.transform.position - destination).magnitude;
 
-            player.transform.LookAt(destination);
+            Quaternion nextRotation = Quaternion.LookRotation(travelDirection);
+            Quaternion rotation = player.transform.rotation;
+
+            
             while (travelledDistance < distance)
             {
+                player.transform.rotation = Quaternion.Lerp(rotation, nextRotation, travelledDistance / distance);
                 travelledDistance += speed * Time.deltaTime;
-                player.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                player.transform.position += travelDirection * speed * Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
 

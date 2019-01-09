@@ -50,7 +50,6 @@ public class Weapon : MonoBehaviour {
 
     private void ShootProjectile(Vector3 position, Vector3 direction)
     {
-        Debug.Log("Shoot projectile!");
         Projectile projectile = Instantiate(
             projectilePrefab,
             position,

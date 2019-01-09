@@ -33,7 +33,8 @@ public class BuildingSpawner : MonoBehaviour
             Building buildingPrefab = buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)];
 
             Vector3 position = start + direction * i * buildingSpace;
-            Building building = Instantiate(buildingPrefab,
+            Building building = Instantiate(
+                buildingPrefab,
                 position,
                 lookAtRotation
             );
