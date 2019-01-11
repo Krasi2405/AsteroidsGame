@@ -40,6 +40,7 @@ public class TriggerEffectMoveto : TriggerEffect
 
     private IEnumerator MoveTo()
     {
+        // TODO: Add saving momentum from point to point.
         foreach(Location location in locations)
         {
             Vector3 destination = location.GetLocation();
@@ -53,8 +54,8 @@ public class TriggerEffectMoveto : TriggerEffect
             
             while (travelledDistance < distance)
             {
-                player.transform.rotation = Quaternion.Lerp(rotation, nextRotation, travelledDistance / distance);
                 travelledDistance += speed * Time.deltaTime;
+                player.transform.rotation = Quaternion.Lerp(rotation, nextRotation, travelledDistance / distance);
                 player.transform.position += travelDirection * speed * Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }

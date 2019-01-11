@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        ship = GetComponent<Spaceship>();
+        ship = GetComponent<Spaceship>();   
     }
 
     private void Update()
     {
         HandleMovement();
-
+        RestrictMovement();
         if (CrossPlatformInputManager.GetButtonDown(modeSwitchActivationKey))
         {
             Debug.Log("Switch mode");
@@ -36,9 +36,7 @@ public class PlayerController : MonoBehaviour
             ship.RequestShoot();
         }
     }
-
     
-
     private void HandleMovement()
     {
         float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -49,6 +47,37 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePositionWorldSpace = Camera.main.ScreenToWorldPoint(mousePositionScreenSpace);
 
         ship.HandleInput(horizontalInput, verticalInput, mousePositionWorldSpace);
+    }
+    
+    private void RestrictMovement()
+    {
+        FollowCamera followCamera = FindObjectOfType<FollowCamera>();
+
+        Vector3 topRestriction = followCamera.GetTopPoint();
+        Vector3 bottomRestriction = followCamera.GetBottomPoint();
+        Vector3 leftRestriction = followCamera.GetLeftPoint();
+        Vector3 rightRestriction = followCamera.GetRightPoint();
+
+        Vector3 position = transform.position;
+        if (position.z > topRestriction.z)
+        {
+            position.z = topRestriction.z;
+        }
+        else if(position.z < bottomRestriction.z)
+        {
+            position.z = bottomRestriction.z;
+        }
+
+        if(position.x < leftRestriction.x)
+        {
+            position.x = leftRestriction.x;
+        }
+        else if(position.x > rightRestriction.x)
+        {
+            position.x = rightRestriction.x;
+        }
+
+        transform.position = position;
     }
 
     

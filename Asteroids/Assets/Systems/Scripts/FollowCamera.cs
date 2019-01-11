@@ -8,22 +8,47 @@ public class FollowCamera : MonoBehaviour {
     private PlayerController player;
 
     [SerializeField]
+    private float playAreaWidth = 20;
+
+    [SerializeField]
+    private float startZoom = 15f;
+
+    [SerializeField]
     private float zoomingSpeedPerSecond = 10;
 
     private Vector3 offset;
-
     private float currentZoomLevel;
+    private Camera camera;
 
-	void Start () {
+    private bool isFollowingPlayer = true;
+    
+
+    void Start () {
+        camera = GetComponent<Camera>();
         player = FindObjectOfType<PlayerController>();
-        offset = transform.position - player.transform.position;
+        offset = new Vector3(0, startZoom, 0);
         currentZoomLevel = offset.y;
-	}
-	
 
-	void LateUpdate () {
-        // transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, 0.2f);
         transform.position = player.transform.position + offset;
+    }
+
+    void LateUpdate () {
+        
+        Vector3 newPosition = player.transform.position + offset;
+        if (!isFollowingPlayer)
+        {
+            newPosition.x = transform.position.x;
+        }
+        if (newPosition.z > playAreaWidth)
+        {
+            newPosition.z = playAreaWidth;
+        }
+        else if (newPosition.z < -playAreaWidth)
+        {
+            newPosition.z = -playAreaWidth;
+        }
+
+        transform.position = newPosition;
 	}
 
     public void ChangeRelativeOffset(Vector3 relativeOffset)
@@ -36,6 +61,68 @@ public class FollowCamera : MonoBehaviour {
     {
         StopCoroutine("ZoomTo");
         StartCoroutine(ZoomTo(targetZoom));
+    }
+    
+    public void LockTo(Vector3 position)
+    {
+        StartCoroutine(MoveTo(position));
+        LockCamera();
+    }
+
+    public void LockCamera()
+    {
+        isFollowingPlayer = false;
+    }
+
+    public void UnlockCamera()
+    {
+        StopCoroutine("MoveTo");
+        isFollowingPlayer = true;
+    }
+
+    public void SetPlayAreaHeight(float height)
+    {
+        playAreaWidth = height;
+    }
+
+
+    private IEnumerator MoveTo(Vector3 position)
+    {
+        for(int i = 0; i < 60; i++)
+        {
+            Vector3 newPosition = Vector3.Lerp(transform.position, position, 0.6f);
+            newPosition.y = currentZoomLevel;
+            transform.position = newPosition;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public Vector3 GetTopPoint()
+    {
+        float playerCameraOffset = transform.position.y - player.transform.position.y;
+        Vector3 top = new Vector3(camera.pixelWidth / 2, camera.pixelHeight, playerCameraOffset);
+        return camera.ScreenToWorldPoint(top);
+    }
+
+    public Vector3 GetBottomPoint()
+    {
+        float playerCameraOffset = transform.position.y - player.transform.position.y;
+        Vector3 bottom = new Vector3(camera.pixelWidth / 2, 0, playerCameraOffset);
+        return camera.ScreenToWorldPoint(bottom);
+    }
+
+    public Vector3 GetLeftPoint()
+    {
+        float playerCameraOffset = transform.position.y - player.transform.position.y;
+        Vector3 left = new Vector3(0, camera.pixelHeight / 2, playerCameraOffset);
+        return camera.ScreenToWorldPoint(left);
+    }
+
+    public Vector3 GetRightPoint()
+    {
+        float playerCameraOffset = transform.position.y - player.transform.position.y;
+        Vector3 left = new Vector3(camera.pixelWidth, camera.pixelHeight / 2, playerCameraOffset);
+        return camera.ScreenToWorldPoint(left);
     }
 
 

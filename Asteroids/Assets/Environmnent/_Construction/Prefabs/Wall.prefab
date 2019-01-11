@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2044456061277887297}
   - component: {fileID: 2044456061276887425}
   - component: {fileID: 2044456061284900481}
+  - component: {fileID: 5759682496062781815}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -93,3 +94,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &5759682496062781815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044456061279078209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 5, z: 11}
+  m_Center: {x: -2, y: -0.9143066, z: 0}
