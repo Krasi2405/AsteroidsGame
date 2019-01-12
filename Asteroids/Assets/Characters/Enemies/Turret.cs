@@ -9,6 +9,12 @@ public class Turret : MonoBehaviour
     private GameObject horizontalPlatform;
 
     [SerializeField]
+    private GameObject destroyedPrefab;
+
+    [SerializeField]
+    private ParticleSystem explosionParticles;
+
+    [SerializeField]
     private float horizontalRotationSpeed = 20f;
 
     private Health health;
@@ -27,11 +33,36 @@ public class Turret : MonoBehaviour
         weapon = GetComponent<Weapon>();
     }
 
+    void Update()
+    {
+        if(health.IsDead())
+        {
+            Die();
+        }
+    }
+
     public void RotateTo(Vector3 direction)
     {
         Vector3 lookAtRotation = Quaternion.LookRotation(direction).eulerAngles;
         RotateHorizontal(lookAtRotation.y);
     }
+
+    private void Die()
+    {
+        if (explosionParticles)
+        {
+            ParticleSystem particles = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+            Destroy(particles, particles.time);
+        }
+
+        if(destroyedPrefab)
+        {
+            Instantiate(destroyedPrefab, transform.position, transform.rotation);
+        }
+
+        Destroy(gameObject, 0.1f);
+    }
+
 
     private void RotateHorizontal(float targetDegrees)
     {

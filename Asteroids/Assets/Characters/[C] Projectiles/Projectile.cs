@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Projectile : MonoBehaviour {
+public abstract class Projectile : MonoBehaviour {
 
     [SerializeField]
     private float speed = 10;
-
-    [SerializeField]
-    private float damage = 5;
 
     [SerializeField]
     private float timeToLive = 20f;
@@ -39,8 +35,27 @@ public class Projectile : MonoBehaviour {
         gameObject.transform.LookAt(transform.position + target.normalized);
     }
 
+    protected virtual void Destruct()
+    {
+        // Debug.Log("Call destruct on projectile " + name);
+    }
+
+    protected abstract void ShootEffect(GameObject gameObj);
+
     private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.GetComponent<Health>() && other.tag != parent.tag && other.tag != gameObject.tag)
+        {
+            Debug.Log("Hit " + other.name);
+            ShootEffect(other.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(Application.isPlaying)
+        {
+            Destruct();
+        }
     }
 }

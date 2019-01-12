@@ -33,7 +33,11 @@ public class FollowCamera : MonoBehaviour {
     }
 
     void LateUpdate () {
-        
+        if(!player)
+        {
+            return;
+        }
+
         Vector3 newPosition = player.transform.position + offset;
         if (!isFollowingPlayer)
         {

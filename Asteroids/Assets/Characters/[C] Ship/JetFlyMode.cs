@@ -20,22 +20,13 @@ public class JetFlyMode : FlyMode {
     [SerializeField]
     private float wingTippingPerSecond = 90;
 
-    
-
-    private Rigidbody rigidbody;
-
-
-    void Start () {
-        rigidbody = GetComponent<Rigidbody>();
-	}
-
 
     public override void HandleInput(float horizontalInput, float verticalInput, Vector3 targetLocation)
     {
         float forwardSpeed = acceleration + acceleration * (verticalInput * accelerationInfluence);
 
-        rigidbody.AddForce(transform.forward * forwardSpeed * Time.deltaTime);
-        rigidbody.AddTorque(Vector3.up * horizontalInput * torque * Time.deltaTime);
+        transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
+        transform.Rotate(new Vector3(0, horizontalInput * torque * Time.deltaTime, 0), Space.World);
 
         TipWings(wingTippingRotation * horizontalInput * -1);
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(FlyModeController))]
 [RequireComponent(typeof(Weapon))]
+[RequireComponent(typeof(Rigidbody))]
 public class Spaceship : MonoBehaviour
 {
     private Health health;
@@ -58,9 +59,23 @@ public class Spaceship : MonoBehaviour
     {
         ParticleSystem particles = Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Destroy(particles, particles.time);
-
         Destroy(gameObject, 0.1f);
+    }
 
-        FindObjectOfType<LevelStateManager>().Lose();
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject gameObj = collision.gameObject;
+        if(gameObj.tag != gameObject.tag && (gameObj.GetComponent<Spaceship>() || gameObj.GetComponent<Turret>()))
+        {
+            Health otherHealth = gameObj.GetComponent<Health>();
+            float smallerHealth = otherHealth.GetHitpoints();
+            if(health.GetHitpoints() < smallerHealth)
+            {
+                smallerHealth = health.GetHitpoints();
+            }
+
+            otherHealth.TakeDamage(smallerHealth);
+            health.TakeDamage(smallerHealth);
+        }
     }
 }

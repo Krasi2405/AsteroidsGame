@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField]
     private float hitpoints = 100;
 
+    [SerializeField]
     private float currentHitpoints;
 
     void Start()
@@ -21,6 +22,11 @@ public class Health : MonoBehaviour
         {
             currentHitpoints = hitpoints;
         }
+    }
+
+    public float GetHitpoints()
+    {
+        return currentHitpoints;
     }
 
     public void TakeDamage(float damage)

@@ -20,6 +20,14 @@ public class PlayerController : MonoBehaviour
         ship = GetComponent<Spaceship>();   
     }
 
+    private void OnDestroy()
+    {
+        if (Application.isPlaying)
+        {
+            FindObjectOfType<LevelStateManager>().Lose();
+        }
+    }
+
     private void Update()
     {
         HandleMovement();

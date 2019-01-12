@@ -2,41 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Turret))]
+
 [RequireComponent(typeof(Weapon))]
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemyDetection))]
-public class TurretController : MonoBehaviour
+[RequireComponent(typeof(FlyModeController))]
+public abstract class AIBehaviour : MonoBehaviour
 {
-    Turret turret;
     Weapon weapon;
     Health health;
     EnemyDetection detection;
+    FlyModeController flyModeController;
 
     PlayerController player;
 
     [SerializeField]
     private float sightDistance = 50;
 
+    private bool hasEngaged = false;
+
     void Start()
     {
-        turret = GetComponent<Turret>();
         weapon = GetComponent<Weapon>();
         health = GetComponent<Health>();
         detection = GetComponent<EnemyDetection>();
 
         player = FindObjectOfType<PlayerController>();
     }
-    
+
 
     void Update()
     {
         if (detection.CanSeeEnemy(player.gameObject))
         {
-            Vector3 direction = (player.transform.position - transform.position);
-            turret.RotateTo(direction);
-
-            weapon.RequestShoot();
+            hasEngaged = true;
+            FightBehaviour();
+        }
+        else
+        {
+            if(hasEngaged)
+            {
+                SeekBehaviour();
+            }
+            else
+            {
+                IdleBehaviour();
+            }
         }
     }
+
+    protected abstract void IdleBehaviour();
+    protected abstract void SeekBehaviour();
+    protected abstract void FightBehaviour();
 }
