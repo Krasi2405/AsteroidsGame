@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     [SerializeField] // TODO: Remove serialize field
     private float currentHitpoints;
 
-    void Start()
+    void Awake()
     {
         currentHitpoints = hitpoints;
     }

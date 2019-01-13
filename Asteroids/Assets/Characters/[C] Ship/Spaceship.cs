@@ -18,7 +18,7 @@ public class Spaceship : MonoBehaviour
     [SerializeField]
     private AudioClip destructionSound;
 
-    void Start()
+    void Awake()
     {
         health = GetComponent<Health>();
         flyModeController = GetComponent<FlyModeController>();
@@ -47,6 +47,11 @@ public class Spaceship : MonoBehaviour
     public void SwitchMode()
     {
         flyModeController.RequestSwitchMode();
+    }
+
+    public float GetHitpoints()
+    {
+        return health.GetHitpoints();
     }
 
     public void AddHitpoints(float additional)

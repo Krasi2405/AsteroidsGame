@@ -19,5 +19,7 @@ public abstract class TriggerEffect : MonoBehaviour
         );
     }
 
+    // Vseki put kato go polzvam tui edna chast ot dushata mi izchezva
+    // TODO: da dobavq abstract async i sync triggereffect classove
     public abstract bool IsAsynchronous();
 }
