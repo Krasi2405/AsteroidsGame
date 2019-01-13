@@ -28,7 +28,7 @@ public class FollowCamera : MonoBehaviour {
         player = FindObjectOfType<PlayerController>();
         offset = new Vector3(0, startZoom, 0);
         currentZoomLevel = offset.y;
-
+        
         transform.position = player.transform.position + offset;
     }
 
@@ -38,7 +38,12 @@ public class FollowCamera : MonoBehaviour {
             return;
         }
 
-        Vector3 newPosition = player.transform.position + offset;
+        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, offset.y);
+        Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(mousePosition);
+        Vector3 mouseWorldPositionOffset = (mouseWorldPosition - player.transform.position) / 4;
+        Vector3 cameraPosition = player.transform.position + mouseWorldPositionOffset;
+
+        Vector3 newPosition = cameraPosition + offset;
         if (!isFollowingPlayer)
         {
             newPosition.x = transform.position.x;
