@@ -19,4 +19,9 @@ public abstract class TriggerEvent : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawIcon(transform.position, "Trigger Event.png");
+    }
 }

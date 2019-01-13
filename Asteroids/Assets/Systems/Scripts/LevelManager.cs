@@ -18,6 +18,10 @@ public class LevelManager : MonoBehaviour {
     public void GoToNextScene()
     {
         int next_level = SceneManager.GetActiveScene().buildIndex + 1;
+        if (next_level >= SceneManager.sceneCountInBuildSettings)
+        {
+            next_level = 0;
+        }
         GoToScene(next_level);
     }
 
@@ -25,12 +29,4 @@ public class LevelManager : MonoBehaviour {
     {
         Application.Quit();
     }
-
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
 }

@@ -16,7 +16,7 @@ public class TriggerEffectSpawnEnemyToEvent : TriggerEffect
         {
             Quaternion rotation = Quaternion.Euler(spawnLocation.GetForwardDirection());
             Spaceship enemy = Instantiate(enemyPrefab, spawnLocation.GetLocation(), rotation);
-            GetComponent<TriggerEventDestroyEnemies>().AddSpaceship(enemy);
+            GetComponent<TriggerEventDestroyEnemies>().AddSpaceship(enemy.gameObject);
         }
     }
 

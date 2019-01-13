@@ -37,8 +37,7 @@ public class Heatseeking : MonoBehaviour
                 degrees,
                 transform.rotation.eulerAngles.z
             );
-
-            Debug.Log("new rot" + newRotation);
+            
             transform.eulerAngles = newRotation;
             fuelTime -= Time.deltaTime;
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TriggerEventDestroyEnemies : TriggerEvent
 {
     [SerializeField]
-    List<Spaceship> spaceships = new List<Spaceship>();
+    List<GameObject> spaceships = new List<GameObject>();
 
     private bool hasCalledFX = false;
 
@@ -29,7 +29,7 @@ public class TriggerEventDestroyEnemies : TriggerEvent
         }    
     }
 
-    public void AddSpaceship(Spaceship spaceship)
+    public void AddSpaceship(GameObject spaceship)
     {
         spaceships.Add(spaceship);
     }
