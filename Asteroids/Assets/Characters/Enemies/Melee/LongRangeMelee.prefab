@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 958688228298629328}
   - component: {fileID: 3942886592707844631}
   m_Layer: 0
-  m_Name: Melee
+  m_Name: LongRangeMelee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &3320883836382460453
 MonoBehaviour:
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e366668649faab45b4c65eda388191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightDistance: 25
+  sightDistance: 60
 --- !u!114 &7892946220450268384
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,14 @@ public class AsteroidSpawner : MonoBehaviour {
     [SerializeField]
     private float spawnTime = 1;
 
-    private float lastSpawnDegrees = 0;
+    [SerializeField]
+    private float spawnRandomWidth = 10f;
+
+    [SerializeField]
+    private float spawnXRotationForceMax = 0.5f;
+
+
+    private float lastSpawnWidth = 0;
 
     void Start()
     {
@@ -21,22 +28,28 @@ public class AsteroidSpawner : MonoBehaviour {
     {
         while (true)
         {
-            Debug.Log("Spawn asteroid!");
             yield return new WaitForSeconds(spawnTime);
             Vector3 position = GetAsteroidSpawnPosition();
+            Debug.Log("Asteroid at " + position);
             SpawnAsteroid(position);
         }
     }
 
     Vector3 GetAsteroidSpawnPosition()
     {
-        int width = Screen.width;
-        int height = Screen.height;
+        Vector3 asteroidPosition = new Vector3(transform.position.x, 0, transform.position.y);
+        float rightWidth;
+        do {
+            rightWidth = Random.Range(-spawnRandomWidth, spawnRandomWidth);
+        } while (lastSpawnWidth >= rightWidth && lastSpawnWidth - 2 < rightWidth ||
+                 lastSpawnWidth <= rightWidth && lastSpawnWidth + 2 > rightWidth);
 
-        Vector3 asteroidPositionScreenSpace = new Vector3(width, height, 0);
-        Vector3 asteroidPositionWorldSpace = Camera.main.ScreenToWorldPoint(asteroidPositionScreenSpace);
+        lastSpawnWidth = rightWidth;
 
-        return asteroidPositionWorldSpace;
+       
+        asteroidPosition += transform.right * rightWidth;
+
+        return asteroidPosition;
     }
 
     void SpawnAsteroid(Vector3 position)
@@ -45,20 +58,14 @@ public class AsteroidSpawner : MonoBehaviour {
         Asteroid asteroid = Instantiate(asteroidPrefabs[index]);
         asteroid.transform.position = position;
         
-        asteroid.transform.RotateAround(Vector3.zero, Vector3.up, GetSpawnDegrees());
-        asteroid.SetTarget(FindObjectOfType<PlayerController>().transform.position);
+        asteroid.SetDirection(GetRandomForwardDirection());
     }
 
-    float GetSpawnDegrees()
+    Vector3 GetRandomForwardDirection()
     {
-        float degrees = Random.Range(0, 360);
-        if(SpawnDegreesOverlap(degrees, lastSpawnDegrees))
-        {
-            return GetSpawnDegrees();
-        }
-
-        lastSpawnDegrees = degrees;
-        return degrees;
+        Vector3 forward = transform.forward;
+        forward += transform.right * Random.Range(-spawnXRotationForceMax, spawnXRotationForceMax);
+        return forward;
     }
 
     bool SpawnDegreesOverlap(float degrees, float lastSpawnDegrees)
@@ -77,5 +84,11 @@ public class AsteroidSpawner : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, 1f);
+        Gizmos.DrawRay(transform.position, transform.forward * 2);
     }
 }

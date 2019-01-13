@@ -20,6 +20,10 @@ public abstract class Projectile : MonoBehaviour {
     
 	void Start () {
         Destroy(gameObject, timeToLive);
+
+        Vector3 position = transform.position;
+        position.y = 0;
+        transform.position = position;
     }
     
     void LateUpdate()

@@ -20,18 +20,13 @@ public class Splitting : MonoBehaviour {
     {
         Debug.Log("Spawn split asteroid!");
         GameObject obj = Instantiate(spawnObject, transform.position, Quaternion.identity);
-
-        transform.LookAt(transform.GetComponent<Asteroid>().GetDirection());
-        Vector3 rotation = transform.localRotation.eulerAngles;
-        Debug.Log("old rotation: " + rotation);
-        rotation.y += angle;
-        Debug.Log("new rotation: " + rotation);
-        obj.transform.eulerAngles = rotation;
+        
         
 
+        
         if (obj.GetComponent<Asteroid>())
         {
-            obj.GetComponent<Asteroid>().SetTarget(obj.transform.position + obj.transform.forward);
+            obj.GetComponent<Asteroid>().SetDirection(Vector3.forward);
         }
     }
 }

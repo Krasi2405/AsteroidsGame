@@ -112,7 +112,7 @@ MonoBehaviour:
     type: 3}
   shootingLocations:
   - {fileID: 1224583715465653175}
-  shotPerSecond: 1
+  shotPerSecond: 2.5
   shootSound: {fileID: 0}
 --- !u!65 &1641658372422381102
 BoxCollider:
@@ -230,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0.025148246, z: 0}
+  m_LocalPosition: {x: 0.0059, y: 0.02, z: 0.0017}
   m_LocalScale: {x: 0.30397594, y: 0.30397606, z: 0.30397606}
   m_Children:
   - {fileID: 400002}
@@ -383,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3544010322768194593}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0062, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1224583715465653176}
@@ -406,12 +406,12 @@ PrefabInstance:
     - target: {fileID: 8412009157834753924, guid: 32828a95b37179140b0cd2eca99ed6a9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0008
+      value: 0.00622
       objectReference: {fileID: 0}
     - target: {fileID: 8412009157834753924, guid: 32828a95b37179140b0cd2eca99ed6a9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.027
+      value: 0.02175
       objectReference: {fileID: 0}
     - target: {fileID: 8412009157834753924, guid: 32828a95b37179140b0cd2eca99ed6a9,
         type: 3}

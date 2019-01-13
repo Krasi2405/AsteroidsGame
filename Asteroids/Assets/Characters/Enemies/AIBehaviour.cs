@@ -35,7 +35,7 @@ public abstract class AIBehaviour : MonoBehaviour
         if (detection.CanSeeEnemy(player.gameObject))
         {
             if (fightCoroutine == null) {
-                Debug.Log("Start fight coroutine!");
+                // Debug.Log("Start fight coroutine!");
                 if (seekCoroutine != null)
                 {
                     StopCoroutine(seekCoroutine);
@@ -57,7 +57,7 @@ public abstract class AIBehaviour : MonoBehaviour
             {
                 if (seekCoroutine == null)
                 {
-                    Debug.Log("Start seek coroutine!");
+                    // Debug.Log("Start seek coroutine!");
                     StopCoroutine(fightCoroutine);
                     fightCoroutine = null;
                     seekCoroutine = StartCoroutine(SeekBehaviour());
@@ -67,7 +67,7 @@ public abstract class AIBehaviour : MonoBehaviour
             {
                 if (idleCoroutine == null)
                 {
-                    Debug.Log("Start idle coroutine!");
+                    // Debug.Log("Start idle coroutine!");
                     idleCoroutine = StartCoroutine(IdleBehaviour());
                 }
             }

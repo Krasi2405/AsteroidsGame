@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class Asteroid : MonoBehaviour {
 
     [SerializeField]
@@ -16,14 +17,24 @@ public class Asteroid : MonoBehaviour {
     [SerializeField]
     private float damage = 20;
 
+    [SerializeField]
+    private float splitRange = 30f;
+
+    [SerializeField]
+    [Range(0.25f, 0.75f)]
+    private float splitScale = 0.5f;
+
     private Vector3 rotationalForce;
 
     private Vector3 targetDirection;
 
+    private bool hasSplit = false;
+
 	void Start () {
         GetComponent<Collider>().enabled = false;
-        Invoke("EnableCollider", 0.4f);
+        Invoke("EnableCollider", 0.5f);
 
+        Destroy(gameObject, 20f);
 
         rotationalForce = new Vector3(
            Random.Range(maxRotationalForce / 10, maxRotationalForce),
@@ -32,35 +43,41 @@ public class Asteroid : MonoBehaviour {
         );
     }
 
-    public void SetTarget(Vector3 targetPosition)
-    {
-        // TODO: This is just a quickfix for a bigger problem with asteroid spawner.
-        // FIX LATER
-        Vector3 pos = transform.position;
-        pos.y = 0;
-        transform.position = pos;
-
-        transform.LookAt(targetPosition);
-        targetDirection = transform.forward;
-    }
-	
-
 	void Update () {
         MoveToTarget();
         ApplyRotationalForce();
-	}
+
+        if (GetComponent<Health>().IsDead())
+        {
+            if (!hasSplit)
+            {
+                SpawnAsteroid(-splitRange);
+                SpawnAsteroid(splitRange);
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    public void SetDirection(Vector3 targetDirection)
+    {
+        this.targetDirection = targetDirection;
+    }
 
     public Vector3 GetDirection()
     {
         return targetDirection;
     }
 
+    public void SetSplit()
+    {
+        hasSplit = true;
+    }
+
     private void EnableCollider()
     {
         GetComponent<Collider>().enabled = true;
     }
-
-
+    
     private void MoveToTarget() {
         transform.Translate(targetDirection * speed * Time.deltaTime, Space.World);
     }
@@ -70,8 +87,9 @@ public class Asteroid : MonoBehaviour {
         transform.Rotate(rotationalForce * Time.deltaTime, Space.Self);
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
+        /*
         if(gameObject.tag == collision.gameObject.tag) // other is asteroid.
         {
             Vector3 explosionPosition = (transform.position + collision.transform.position) / 2;
@@ -87,14 +105,25 @@ public class Asteroid : MonoBehaviour {
         }
         else if(collision.gameObject.GetComponent<Projectile>())
         {
-            if (GetComponent<Splitting>())
+            if (!hasSplit)
             {
-                GetComponent<Splitting>().Split();
+                SpawnAsteroid(-splitRange);
+                SpawnAsteroid(splitRange);
             }
+
             Destroy(collision.gameObject);
             Destroy(gameObject);
-
-            FindObjectOfType<Score>().AddScore(100); // TODO: SerializeField this.
+        }
+        */
+        if(collision.gameObject.GetComponent<Health>())
+        {
+            collision.gameObject.GetComponent<Health>().TakeDamage(damage);
+            if (!hasSplit)
+            {
+                SpawnAsteroid(-splitRange);
+                SpawnAsteroid(splitRange);
+            }
+            Destroy(gameObject);
         }
     }
 
@@ -102,5 +131,20 @@ public class Asteroid : MonoBehaviour {
     {
         ParticleSystem explosion = Instantiate(particlesPrefab, position, Quaternion.identity);
         Destroy(explosion, explosion.time);
+    }
+
+    void SpawnAsteroid(float angle)
+    {
+        Asteroid obj = Instantiate(gameObject, transform.position, transform.rotation).GetComponent<Asteroid>();
+        obj.transform.localScale *= splitScale;
+
+        Vector3 direction = GetDirection();
+        Vector3 right = Vector3.Cross(direction, Vector3.up);
+
+        direction += right * angle / 90;
+        direction.Normalize();
+        
+        obj.SetDirection(direction);
+        obj.SetSplit();
     }
 }

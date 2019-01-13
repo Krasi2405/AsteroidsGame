@@ -96,30 +96,19 @@ public class Spaceship : MonoBehaviour
             health.TakeDamage(smallerHealth);
         }
 
-        StartCoroutine(StabilizeShip());
+        if (GetComponent<Health>().IsDead()) return;
+        StabilizeShip();
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        StartCoroutine(StabilizeShip());
+        StabilizeShip();
     }
 
-    private IEnumerator StabilizeShip()
+    private void StabilizeShip()
     {
-        for (int i = 0; i < 30; i++)
-        {
-            Vector3 position = transform.position;
-            position.y = 0;
-            transform.position = position;
-            Debug.Log("Set position to " + position);
-
-            Vector3 rotation = transform.rotation.eulerAngles;
-            rotation.x = 0;
-            rotation.z = 0;
-            Debug.Log("Set rotation to " + rotation);
-            transform.rotation = Quaternion.Euler(rotation);
-            
-            yield return new WaitForEndOfFrame();
-        }
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.angularVelocity = Vector3.zero;
+        rigidbody.velocity = Vector3.zero;
     }
 }

@@ -47,6 +47,8 @@ public class Heatseeking : MonoBehaviour
     {
         while(true)
         {
+            if (target) yield return new WaitForSeconds(0.25f);
+
             Collider[] targets = Physics.OverlapSphere(transform.position, heatRange);
             foreach(Collider collider in targets)
             {

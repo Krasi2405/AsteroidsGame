@@ -7,11 +7,14 @@ public class TriggerEventEnter : TriggerEvent
     [SerializeField]
     private string tag;
 
+    private bool hasBeenTriggered = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if(tag == other.gameObject.tag)
+        if(!hasBeenTriggered && tag == other.gameObject.tag)
         {
             StartCoroutine(CallTriggerEffects());
+            hasBeenTriggered = true;
         }
     }
 }

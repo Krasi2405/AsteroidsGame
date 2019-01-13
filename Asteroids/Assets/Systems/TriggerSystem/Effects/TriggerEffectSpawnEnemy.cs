@@ -14,8 +14,12 @@ public class TriggerEffectSpawnEnemy : TriggerEffect
     {
         foreach(Location spawnLocation in spawnLocations)
         {
-            Quaternion rotation = Quaternion.Euler(spawnLocation.GetForwardDirection());
-            Instantiate(enemyPrefab, spawnLocation.GetLocation(), rotation);
+            Spaceship enemy = Instantiate(
+                enemyPrefab, spawnLocation.GetLocation(), 
+                Quaternion.LookRotation(spawnLocation.GetForwardDirection())
+            );
+            
+            Debug.Log("Forward " + spawnLocation.GetForwardDirection());
         }
     }
 
