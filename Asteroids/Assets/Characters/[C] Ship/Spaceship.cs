@@ -13,7 +13,10 @@ public class Spaceship : MonoBehaviour
     private Weapon weapon;
 
     [SerializeField]
-    ParticleSystem explosionParticles;
+    private ParticleSystem explosionParticles;
+
+    [SerializeField]
+    private AudioClip destructionSound;
 
     void Start()
     {
@@ -28,6 +31,7 @@ public class Spaceship : MonoBehaviour
         {
             Die();
         }
+        StabilizeShip();
     }
 
     public void RequestShoot()
@@ -57,9 +61,18 @@ public class Spaceship : MonoBehaviour
 
     private void Die()
     {
-        ParticleSystem particles = Instantiate(explosionParticles, transform.position, Quaternion.identity);
-        Destroy(particles, particles.time);
-        Destroy(gameObject, 0.1f);
+        if (explosionParticles)
+        {
+            ParticleSystem particles = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+            Destroy(particles, particles.time);
+        }
+
+        if(destructionSound)
+        {
+            AudioSource.PlayClipAtPoint(destructionSound, transform.position);
+        }
+
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -76,6 +89,32 @@ public class Spaceship : MonoBehaviour
 
             otherHealth.TakeDamage(smallerHealth);
             health.TakeDamage(smallerHealth);
+        }
+
+        StartCoroutine(StabilizeShip());
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        StartCoroutine(StabilizeShip());
+    }
+
+    private IEnumerator StabilizeShip()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 position = transform.position;
+            position.y = 0;
+            transform.position = position;
+            Debug.Log("Set position to " + position);
+
+            Vector3 rotation = transform.rotation.eulerAngles;
+            rotation.x = 0;
+            rotation.z = 0;
+            Debug.Log("Set rotation to " + rotation);
+            transform.rotation = Quaternion.Euler(rotation);
+            
+            yield return new WaitForEndOfFrame();
         }
     }
 }

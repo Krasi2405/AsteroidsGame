@@ -21,6 +21,7 @@ public class ProjectileBomb : Projectile
     {
         if(GetComponent<Health>().IsDead())
         {
+            Destruct();
             Destroy(gameObject);
         }
     }
@@ -30,9 +31,9 @@ public class ProjectileBomb : Projectile
         DealAreaOfEffectDamage();
     }
 
-    protected override void ShootEffect(GameObject gameObject)
+    protected override void ShootEffect(GameObject gameObj)
     {
-        Health health = gameObject.GetComponent<Health>();
+        Health health = gameObj.GetComponent<Health>();
         health.TakeDamage(targetDamage);
         Destroy(gameObject);
     }

@@ -64,6 +64,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalPlatform: {fileID: 3544010322768194593}
+  destroyedPrefab: {fileID: 438075729953220187, guid: 271c3e83361387f4694c0ce80c003f87,
+    type: 3}
+  explosionParticles: {fileID: 6133340443473167529, guid: 14a7a9a30537a2a4a81ae50270081344,
+    type: 3}
   horizontalRotationSpeed: 20
 --- !u!114 &2965553108080395707
 MonoBehaviour:
@@ -78,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoints: 100
+  currentHitpoints: 0
 --- !u!114 &4825982561165982341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +113,7 @@ MonoBehaviour:
   shootingLocations:
   - {fileID: 1224583715465653175}
   shotPerSecond: 1
+  shootSound: {fileID: 0}
 --- !u!65 &1641658372422381102
 BoxCollider:
   m_ObjectHideFlags: 0

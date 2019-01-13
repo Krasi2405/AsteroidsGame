@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && FindObjectOfType<LevelStateManager>())
         {
             FindObjectOfType<LevelStateManager>().Lose();
         }

@@ -13,6 +13,9 @@ public abstract class Projectile : MonoBehaviour {
     [SerializeField]
     private GameObject parent;
 
+    [SerializeField]
+    private string parentTag;
+
     private Vector3 target;
     
 	void Start () {
@@ -21,12 +24,18 @@ public abstract class Projectile : MonoBehaviour {
     
     void LateUpdate()
     {
-        transform.position += target.normalized * speed * Time.deltaTime;
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     public void SetParent(GameObject parent)
     {
         this.parent = parent;
+        parentTag = parent.tag;
+    }
+
+    public GameObject GetParent()
+    {
+        return parent;
     }
 
     public void SetTarget(Vector3 target)
@@ -44,17 +53,10 @@ public abstract class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Health>() && other.tag != parent.tag && other.tag != gameObject.tag)
+        if(other.gameObject && other.GetComponent<Health>() && other.tag != parentTag && other.tag != gameObject.tag)
         {
             Debug.Log("Hit " + other.name);
             ShootEffect(other.gameObject);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if(Application.isPlaying)
-        {
             Destruct();
         }
     }

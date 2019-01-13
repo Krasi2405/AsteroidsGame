@@ -13,6 +13,9 @@ public class Weapon : MonoBehaviour {
     [SerializeField]
     private float shotPerSecond = 5;
 
+    [SerializeField]
+    private AudioClip shootSound;
+
     private float shotDelay;
 
     private bool canShoot = true;
@@ -25,6 +28,9 @@ public class Weapon : MonoBehaviour {
     {
         if(canShoot)
         {
+            if(shootSound)
+                AudioSource.PlayClipAtPoint(shootSound, transform.position);
+
             canShoot = false;
             Shoot();
             StartCoroutine(activateShooting());

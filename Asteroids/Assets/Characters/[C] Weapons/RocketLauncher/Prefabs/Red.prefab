@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4114116518781886693}
   m_Layer: 0
   m_Name: Red
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,6 +94,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalPlatform: {fileID: 698724149004785072}
+  destroyedPrefab: {fileID: 438075729953220187, guid: 271c3e83361387f4694c0ce80c003f87,
+    type: 3}
+  explosionParticles: {fileID: 6133340443473167529, guid: 14a7a9a30537a2a4a81ae50270081344,
+    type: 3}
   horizontalRotationSpeed: 20
 --- !u!114 &6021900205246739288
 MonoBehaviour:
@@ -114,6 +118,7 @@ MonoBehaviour:
   - {fileID: 3213419928444418571}
   - {fileID: 6082942116216529193}
   shotPerSecond: 0.2
+  shootSound: {fileID: 0}
 --- !u!114 &7035873836025191368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoints: 100
+  currentHitpoints: 0
 --- !u!114 &4114116518781886693
 MonoBehaviour:
   m_ObjectHideFlags: 0

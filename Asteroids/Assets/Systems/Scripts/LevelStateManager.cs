@@ -16,12 +16,12 @@ public class LevelStateManager : MonoBehaviour {
 	
 	public void Lose()
     {
-        Invoke("GoToNextScene", 2);
+        Invoke("GoToLoseScene", 2);
     }
 
     public void Win()
     {
-        Invoke("GoToLoseScene", 2);
+        Invoke("GoToNextScene", 2);
     }
 
     private void GoToNextScene()

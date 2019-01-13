@@ -5,10 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Building : MonoBehaviour
 {
+
     private void OnCollisionEnter(Collision collision)
     {
         GameObject gameObj = collision.gameObject;
-        if(gameObj.GetComponent<Health>())
+        if(gameObj.GetComponent<Health>() && gameObj.tag != gameObject.tag)
         {
             // Oneshot
             gameObj.GetComponent<Health>().TakeDamage(9999);

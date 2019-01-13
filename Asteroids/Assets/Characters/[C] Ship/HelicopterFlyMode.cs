@@ -24,12 +24,4 @@ public class HelicopterFlyMode : FlyMode {
         direction *= speed * Time.deltaTime;
         transform.Translate(direction, Space.World);
     }
-
-    void Update () {
-        float verticalInput = CrossPlatformInputManager.GetAxis("Vertical");
-        float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
-        
-
-        
-    }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1907102108386774898}
   - component: {fileID: 4218214652159137890}
   - component: {fileID: 336448774550465051}
+  - component: {fileID: 5995708782710243847}
   m_Layer: 0
   m_Name: rocket
   m_TagString: EnemyProjectile
@@ -128,7 +129,8 @@ MonoBehaviour:
   targetDamage: 10
   areaOfEffectDamage: 5
   radius: 2
-  explosionParticles: {fileID: 0}
+  explosionParticles: {fileID: 4378871297328289521, guid: ef42093e0cda081459f027ace5fc2b9a,
+    type: 3}
 --- !u!114 &336448774550465051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879c8cb0f21b64c408d4aa22af4aaa8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 5
+  hitpoints: 15
   currentHitpoints: 0
+--- !u!114 &5995708782710243847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9045764843344495775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ea37b43b2dacf42a3f61f46abeaced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heatRange: 20
+  rotationSpeedPerSecond: 60
+  fuelTime: 2
+  target: {fileID: 0}
