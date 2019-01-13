@@ -117,7 +117,7 @@ MonoBehaviour:
   - {fileID: 5658808957709476961}
   - {fileID: 3213419928444418571}
   - {fileID: 6082942116216529193}
-  shotPerSecond: 0.2
+  shotPerSecond: 0.5
   shootSound: {fileID: 0}
 --- !u!114 &7035873836025191368
 MonoBehaviour:

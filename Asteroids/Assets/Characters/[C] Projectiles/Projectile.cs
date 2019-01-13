@@ -59,7 +59,6 @@ public abstract class Projectile : MonoBehaviour {
     {
         if(other.gameObject && other.GetComponent<Health>() && other.tag != parentTag && other.tag != gameObject.tag)
         {
-            Debug.Log("Hit " + other.name);
             ShootEffect(other.gameObject);
             Destruct();
         }

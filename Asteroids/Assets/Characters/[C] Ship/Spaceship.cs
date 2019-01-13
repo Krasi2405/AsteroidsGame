@@ -31,7 +31,7 @@ public class Spaceship : MonoBehaviour
         {
             Die();
         }
-        StabilizeShip();
+        StabilizeShip(); // really tired of rigidbodies.
     }
 
     public void RequestShoot()
@@ -97,16 +97,22 @@ public class Spaceship : MonoBehaviour
         }
 
         if (GetComponent<Health>().IsDead()) return;
-        StabilizeShip();
+       
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        StabilizeShip();
-    }
 
+    // Simulates kinematic rigidbody.
+    // Needed to because no own collision detection if no rigidbody.
     private void StabilizeShip()
     {
+        Vector3 position = transform.position;
+        position.y = 0;
+        transform.position = position;
+
+        Vector3 rotation = transform.eulerAngles;
+        rotation.x = 0;
+        transform.rotation = Quaternion.Euler(rotation);
+
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.angularVelocity = Vector3.zero;
         rigidbody.velocity = Vector3.zero;

@@ -30,7 +30,6 @@ public class AsteroidSpawner : MonoBehaviour {
         {
             yield return new WaitForSeconds(spawnTime);
             Vector3 position = GetAsteroidSpawnPosition();
-            Debug.Log("Asteroid at " + position);
             SpawnAsteroid(position);
         }
     }

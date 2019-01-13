@@ -34,13 +34,11 @@ public class PlayerController : MonoBehaviour
         RestrictMovement();
         if (CrossPlatformInputManager.GetButtonDown(modeSwitchActivationKey))
         {
-            Debug.Log("Switch mode");
             ship.SwitchMode();
         }
 
         if(CrossPlatformInputManager.GetButton(shootingKey))
         {
-            Debug.Log("Fire!");
             ship.RequestShoot();
         }
     }
