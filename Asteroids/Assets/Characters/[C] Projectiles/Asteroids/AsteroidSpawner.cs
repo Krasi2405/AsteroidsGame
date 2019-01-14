@@ -67,24 +67,6 @@ public class AsteroidSpawner : MonoBehaviour {
         return forward;
     }
 
-    bool SpawnDegreesOverlap(float degrees, float lastSpawnDegrees)
-    {
-        float testDegrees = degrees + 10;
-        float testTowards = lastSpawnDegrees + 10;
-
-        testDegrees = testDegrees % 360;
-        testTowards = testTowards % 360;
-
-        // 10 is degrees that asteroids have to be apart when spawning
-        // TODO: perhaps change to SerializeField in future
-        if (testDegrees >= testTowards && testDegrees - 10 <= testTowards ||
-           testDegrees <= testTowards && testDegrees + 10 >= testTowards)
-        {
-            return true;
-        }
-        return false;
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position, 1f);

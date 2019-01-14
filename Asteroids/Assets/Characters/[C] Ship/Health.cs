@@ -6,8 +6,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private float hitpoints = 100;
-
-    [SerializeField] // TODO: Remove serialize field
+    
     private float currentHitpoints;
 
     void Awake()

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CheckpointReset : MonoBehaviour
 {
-    [SerializeField] // TODO: Remove SerializeField
     private string lastLevelName = "";
 
     private static CheckpointReset Instance;

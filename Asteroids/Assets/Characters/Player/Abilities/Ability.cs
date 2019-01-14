@@ -12,7 +12,6 @@ public abstract class Ability : MonoBehaviour
     [SerializeField]
     float cooldown = 8;
     
-    [SerializeField] // TODO: Remove serialize field!
     private float currentCooldown;
 
     void Awake()

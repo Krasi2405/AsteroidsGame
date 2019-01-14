@@ -11,7 +11,6 @@ public class Building : MonoBehaviour
         GameObject gameObj = collision.gameObject;
         if(gameObj.GetComponent<Health>() && gameObj.tag != gameObject.tag)
         {
-            // Oneshot
             gameObj.GetComponent<Health>().TakeDamage(9999);
         }
     }

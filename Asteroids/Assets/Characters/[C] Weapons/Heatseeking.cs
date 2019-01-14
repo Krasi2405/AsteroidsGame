@@ -14,9 +14,8 @@ public class Heatseeking : MonoBehaviour
     [SerializeField]
     private float fuelTime = 2f;
     
-
-    [SerializeField] // TODO: Remove serializefield
     GameObject target;
+
     private void Start()
     {
         StartCoroutine(PickupTarget());
