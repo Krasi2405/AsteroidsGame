@@ -374,7 +374,7 @@ MonoBehaviour:
   - {fileID: 5210666979420410158}
   - {fileID: 3074547205345358348}
   shotPerSecond: 5
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 7225cc918808ef64bb75b03295be9a77, type: 3}
 --- !u!114 &1359902552328459593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,8 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63005f20e7c6bf24e9d1939b1dc77a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticles: {fileID: 0}
-  destructionSound: {fileID: 0}
+  explosionParticles: {fileID: 6133340443473167529, guid: 14a7a9a30537a2a4a81ae50270081344,
+    type: 3}
+  destructionSound: {fileID: 8300000, guid: 58c31083d81280d4aaa0aeb9e53eb86b, type: 3}
 --- !u!114 &3528414943409372408
 MonoBehaviour:
   m_ObjectHideFlags: 0

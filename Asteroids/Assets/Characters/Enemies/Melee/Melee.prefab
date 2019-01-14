@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTriggerName: 
+  movementSound: {fileID: 0}
   speed: 10
   rotationLerpSpeed: 0.05
 --- !u!114 &4117913672596835118
@@ -169,8 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponWelderParticles: {fileID: 8251676256732330953}
   welderSound: {fileID: 8300000, guid: 3cac3fab78c7c234ca98d84d4cb290fd, type: 3}
-  meleeRange: 10
-  damagePerSecond: 20
+  meleeRange: 15
+  damagePerSecond: 10
 --- !u!82 &2685888473514272173
 AudioSource:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -227,7 +228,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

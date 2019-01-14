@@ -12,8 +12,6 @@ public class TriggerEffectMoveto : TriggerEffect
 
     private PlayerController player;
 
-    private int locationIndex = 0;
-
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();

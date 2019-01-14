@@ -98,6 +98,7 @@ MonoBehaviour:
     type: 3}
   explosionParticles: {fileID: 6133340443473167529, guid: 14a7a9a30537a2a4a81ae50270081344,
     type: 3}
+  destructionSound: {fileID: 8300000, guid: 798b37d2cbb3d2a4c846070c319ce1f7, type: 3}
   horizontalRotationSpeed: 20
 --- !u!114 &6021900205246739288
 MonoBehaviour:
@@ -118,7 +119,7 @@ MonoBehaviour:
   - {fileID: 3213419928444418571}
   - {fileID: 6082942116216529193}
   shotPerSecond: 0.5
-  shootSound: {fileID: 8300000, guid: 798b37d2cbb3d2a4c846070c319ce1f7, type: 3}
+  shootSound: {fileID: 8300000, guid: 3863961c7dba73a4285de13a1bd4f10c, type: 3}
 --- !u!114 &7035873836025191368
 MonoBehaviour:
   m_ObjectHideFlags: 0

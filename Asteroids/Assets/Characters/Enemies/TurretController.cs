@@ -15,9 +15,6 @@ public class TurretController : MonoBehaviour
 
     PlayerController player;
 
-    [SerializeField]
-    private float sightDistance = 50;
-
     void Start()
     {
         turret = GetComponent<Turret>();

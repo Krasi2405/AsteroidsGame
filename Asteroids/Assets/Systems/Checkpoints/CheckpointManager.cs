@@ -8,8 +8,6 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField]
     private Checkpoint[] checkpointLocations;
 
-    private int checkpointIndex = 0;
-
     void Start()
     {
         string levelName = SceneManager.GetActiveScene().name;

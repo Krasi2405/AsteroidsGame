@@ -20,7 +20,6 @@ public class JetFlyMode : FlyMode {
     [SerializeField]
     private float wingTippingPerSecond = 90;
 
-
     public override void HandleInput(float horizontalInput, float verticalInput, Vector3 targetLocation)
     {
         float forwardSpeed = acceleration + acceleration * (verticalInput * accelerationInfluence);
@@ -29,6 +28,12 @@ public class JetFlyMode : FlyMode {
         transform.Rotate(new Vector3(0, horizontalInput * torque * Time.deltaTime, 0), Space.World);
 
         TipWings(wingTippingRotation * horizontalInput * -1);
+
+        
+        if(GetComponent<AudioSource>())
+        {
+            GetComponent<AudioSource>().volume = 0.5f + verticalInput / 4;
+        }
     }
 
     void TipWings(float target)

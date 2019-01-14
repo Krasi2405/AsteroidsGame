@@ -29,8 +29,10 @@ public class Spaceship : MonoBehaviour
     {
         if(health.IsDead())
         {
+            if (destructionSound)
+                AudioSource.PlayClipAtPoint(destructionSound, transform.position);
+
             Die();
-            AudioSource.PlayClipAtPoint(destructionSound, transform.position);
         }
         StabilizeShip(); // really tired of rigidbodies.
     }

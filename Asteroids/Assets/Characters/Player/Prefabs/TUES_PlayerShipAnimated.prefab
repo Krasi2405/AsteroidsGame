@@ -5256,7 +5256,7 @@ MonoBehaviour:
   - {fileID: 3726816166788596320}
   - {fileID: 5739552046057315677}
   shotPerSecond: 2
-  shootSound: {fileID: 8300000, guid: bf75b984df8a84987bcf3a8bf6e2862d, type: 3}
+  shootSound: {fileID: 8300000, guid: fbc87954fc0f0624d969362a5461dcff, type: 3}
 --- !u!114 &9139776579982743984
 MonoBehaviour:
   m_ObjectHideFlags: 0
