@@ -43,7 +43,7 @@ public class MusicPlayer : MonoBehaviour
     void PlayClip(int clipIndex)
     {
         AudioClip audioClip = audioClips[clipIndex];
-        if (audioSource.clip == null || audioSource.clip != audioClip)
+        if (audioSource && (audioSource.clip == null || audioSource.clip != audioClip))
         {
             audioSource.clip = audioClip;
             audioSource.Play();
