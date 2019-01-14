@@ -30,6 +30,7 @@ public class Spaceship : MonoBehaviour
         if(health.IsDead())
         {
             Die();
+            AudioSource.PlayClipAtPoint(destructionSound, transform.position);
         }
         StabilizeShip(); // really tired of rigidbodies.
     }
@@ -62,6 +63,11 @@ public class Spaceship : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health.TakeDamage(damage);
+    }
+
+    public void PlayClip(AudioClip audioClip)
+    {
+
     }
 
     private void Die()

@@ -16,7 +16,7 @@ public abstract class AIBehaviour : MonoBehaviour
 
     private bool hasEngaged = false;
 
-    void Start()
+    void Awake()
     {
         weapon = GetComponent<Weapon>();
         health = GetComponent<Health>();
@@ -32,6 +32,8 @@ public abstract class AIBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!player) return;
+
         if (detection.CanSeeEnemy(player.gameObject))
         {
             if (fightCoroutine == null) {

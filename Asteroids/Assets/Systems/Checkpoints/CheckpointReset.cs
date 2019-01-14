@@ -15,12 +15,9 @@ public class CheckpointReset : MonoBehaviour
         
         if(Instance)
         {
-            Destroy(gameObject);
+            Destroy(Instance);
         }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
 
         DontDestroyOnLoad(gameObject);
     }

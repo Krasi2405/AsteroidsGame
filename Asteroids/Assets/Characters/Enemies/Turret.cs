@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(Weapon))]
 public class Turret : MonoBehaviour
 {
     [SerializeField]
@@ -13,6 +14,9 @@ public class Turret : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem explosionParticles;
+
+    [SerializeField]
+    private AudioClip destructionSound;
 
     [SerializeField]
     private float horizontalRotationSpeed = 20f;
@@ -37,6 +41,9 @@ public class Turret : MonoBehaviour
     {
         if(health.IsDead())
         {
+            if(destructionSound)
+                AudioSource.PlayClipAtPoint(destructionSound, transform.position);
+
             Die();
         }
     }

@@ -18,8 +18,6 @@ public class TriggerEffectSpawnEnemy : TriggerEffect
                 enemyPrefab, spawnLocation.GetLocation(), 
                 Quaternion.LookRotation(spawnLocation.GetForwardDirection())
             );
-            
-            Debug.Log("Forward " + spawnLocation.GetForwardDirection());
         }
     }
 

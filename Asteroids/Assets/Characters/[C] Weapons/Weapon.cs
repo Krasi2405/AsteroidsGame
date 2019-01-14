@@ -19,8 +19,9 @@ public class Weapon : MonoBehaviour {
     private float shotDelay;
 
     private bool canShoot = true;
+    
 
-	void Start () {
+    void Start () {
         shotDelay = 1 / shotPerSecond;
 	}
 
@@ -28,8 +29,10 @@ public class Weapon : MonoBehaviour {
     {
         if(canShoot)
         {
-            if(shootSound)
+            if (shootSound)
+            {
                 AudioSource.PlayClipAtPoint(shootSound, transform.position);
+            }
 
             canShoot = false;
             Shoot();

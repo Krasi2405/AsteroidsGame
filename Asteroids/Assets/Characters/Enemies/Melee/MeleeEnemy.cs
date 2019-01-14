@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class MeleeEnemy : AIBehaviour
 {
     [SerializeField]
     private ParticleSystem weaponWelderParticles;
+
+    [SerializeField]
+    private AudioClip welderSound;
 
     [SerializeField]
     private float meleeRange = 2f;
@@ -14,6 +19,14 @@ public class MeleeEnemy : AIBehaviour
     private float damagePerSecond = 20;
 
     private Vector3 playerPosition;
+
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = welderSound;
+    }
 
     protected override IEnumerator FightBehaviour()
     {
@@ -26,10 +39,15 @@ public class MeleeEnemy : AIBehaviour
             {
                 if(!weaponWelderParticles.isPlaying)
                     weaponWelderParticles.Play();
+
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
+
                 if (distance > meleeRange / 2)
                 {
                     flyModeController.HandleInput(0, 0.4f, player.transform.position);
                 }
+               
                 player.GetComponent<Health>().TakeDamage(damagePerSecond * Time.deltaTime);
             }
             else
@@ -37,6 +55,9 @@ public class MeleeEnemy : AIBehaviour
                 flyModeController.HandleInput(0, 1, player.transform.position);
                 if (weaponWelderParticles.isPlaying)
                     weaponWelderParticles.Stop();
+
+                if (audioSource.isPlaying)
+                    audioSource.Stop();
             }
             yield return new WaitForEndOfFrame();
         }
