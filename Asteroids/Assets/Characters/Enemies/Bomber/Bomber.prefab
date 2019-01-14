@@ -320,6 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTriggerName: 
+  movementSound: {fileID: 0}
   acceleration: 5
   accelerationInfluence: 0.6
   torque: 5

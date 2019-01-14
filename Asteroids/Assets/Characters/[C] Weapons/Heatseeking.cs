@@ -53,7 +53,7 @@ public class Heatseeking : MonoBehaviour
             foreach(Collider collider in targets)
             {
                 GameObject target = collider.gameObject;
-                if(target.GetComponent<Spaceship>() && 
+                if(target && target.GetComponent<Spaceship>() &&
                    target.tag != GetComponent<Projectile>().GetParent().tag &&
                    target.tag != gameObject.tag)
                 {

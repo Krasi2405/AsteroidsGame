@@ -32,7 +32,7 @@ public class Asteroid : MonoBehaviour {
 
 	void Start () {
         GetComponent<Collider>().enabled = false;
-        Invoke("EnableCollider", 0.5f);
+        Invoke("EnableCollider", 0.4f);
 
         Destroy(gameObject, 20f);
 

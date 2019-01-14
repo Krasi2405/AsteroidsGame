@@ -15,36 +15,33 @@ public class Bomber : AIBehaviour
         while(true)
         {
             float distance = (transform.position - player.transform.position).magnitude;
-            Vector3 deltaPosition = (transform.position - player.transform.position).normalized;
+            
             if (distance < releaseBombDistance)
             {
                 if(!steeredAroundPlayer && transform.position.x < player.transform.position.x)
-                {
                     steeredAroundPlayer = true;
-                }
 
                 if(!releasedBombs)
                 {
                     releasedBombs = true;
                     weapon.RequestShoot();
-                    Debug.Log("Release bombs!");
                 }
 
                 if (steeredAroundPlayer)
                 {
                     Vector3 newPosition = new Vector3(0, 0, transform.position.z);
-                    deltaPosition = (newPosition - Vector3.zero).normalized;
+                    Vector3 deltaPosition = (transform.position - newPosition).normalized;
                     flyModeController.HandleInput(-deltaPosition.z, 1, player.transform.position);
                 }
                 else
                 {
-                    deltaPosition.z /= 2;
+                    Vector3 deltaPosition = (transform.position - player.transform.position).normalized;
                     flyModeController.HandleInput(deltaPosition.z, 1, player.transform.position);
-                }   
-                
+                }
             }
             else
             {
+                Vector3 deltaPosition = (transform.position - player.transform.position).normalized;
                 flyModeController.HandleInput(-deltaPosition.z, 1, player.transform.position);
             }
             yield return new WaitForEndOfFrame();
